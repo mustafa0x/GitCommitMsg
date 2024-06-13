@@ -16,9 +16,9 @@ class GitCommitMsgThread(threading.Thread):
       cmd = 'echo off && ' \
         'for /f "tokens=1" %%a in ' \
         '( \'"git blame "%s" -L %d,%d --root -s -l"\') do ' \
-        'git show --name-status "%%a"'
+        'git show -p "%%a"'
     else:
-      cmd = "git show --name-status " \
+      cmd = "git show -p " \
         "$(git blame '%s' -L %d,%d | " \
         "awk '{print $1}')"
     self.command = cmd % (self.file_name, self.start_line, self.end_line)
